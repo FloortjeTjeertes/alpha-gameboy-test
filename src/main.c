@@ -114,6 +114,8 @@ move_sprite(characterstruct->spriteids[21+8],x+(spritesize*4)+2,y+spritesize*3);
         MoveSprite(&alpha,alpha.x,alpha.y);
     } 
  
+
+
 void main(){
 
         set_bkg_data(0, 153, devil_data);
@@ -157,20 +159,40 @@ void main(){
                         
                        delay(20);
                 }
-        }
+        } 
+
+                    BOOLEAN jumping =TRUE;
+
         if(joypad()&J_A){
-                for(int i=0; i<=5; i=i+1) {
-                            wait_vbl_done();
+            if (jumping){
+             for (INT8 i = 0; i < 10; i++)
+             {
+            
+             
+                    alpha.y-=(1 *i)^2 + (1 * i);
 
-                     alpha.y-=1;
 
-                      
-                    //    delay(20);
-                }
+                    delay(20);
+             }
+            jumping = FALSE;
+
+            }
+            else{
+
+             for (INT8 i = 0; i < 10; i++)
+             {
+            
+             
+                    alpha.y+=(1 *i)^2 + (1 * i);
+
+
+                    delay(20);
+             }   
+            }
         }
-        
+         
 
-   
+  
 
 
    

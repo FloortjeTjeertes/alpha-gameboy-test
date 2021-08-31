@@ -4788,19 +4788,19 @@ _MakeSprite::
 ;src/main.c:115: } 
 	add	sp, #5
 	ret
-;src/main.c:117: void main(){
+;src/main.c:119: void main(){
 ;	---------------------------------
 ; Function main
 ; ---------------------------------
 _main::
-;src/main.c:119: set_bkg_data(0, 153, devil_data);
+;src/main.c:121: set_bkg_data(0, 153, devil_data);
 	ld	de, #_devil_data
 	push	de
 	ld	hl, #0x9900
 	push	hl
 	call	_set_bkg_data
 	add	sp, #4
-;src/main.c:120: set_bkg_tiles(0, 0, 20, 18, devil_map);
+;src/main.c:122: set_bkg_tiles(0, 0, 20, 18, devil_map);
 	ld	de, #_devil_map
 	push	de
 	ld	hl, #0x1214
@@ -4810,36 +4810,36 @@ _main::
 	push	af
 	call	_set_bkg_tiles
 	add	sp, #6
-;src/main.c:121: SHOW_BKG;
+;src/main.c:123: SHOW_BKG;
 	ldh	a, (_LCDC_REG + 0)
 	or	a, #0x01
 	ldh	(_LCDC_REG + 0), a
-;src/main.c:122: set_sprite_data(0, 30, Chibi_babies2_data);
+;src/main.c:124: set_sprite_data(0, 30, Chibi_babies2_data);
 	ld	de, #_Chibi_babies2_data
 	push	de
 	ld	hl, #0x1e00
 	push	hl
 	call	_set_sprite_data
 	add	sp, #4
-;src/main.c:124: MakeSprite();
+;src/main.c:126: MakeSprite();
 	call	_MakeSprite
-;src/main.c:126: SHOW_SPRITES;
+;src/main.c:128: SHOW_SPRITES;
 	ldh	a, (_LCDC_REG + 0)
 	or	a, #0x02
 	ldh	(_LCDC_REG + 0), a
-;src/main.c:128: DISPLAY_ON;
+;src/main.c:130: DISPLAY_ON;
 	ldh	a, (_LCDC_REG + 0)
 	or	a, #0x80
 	ldh	(_LCDC_REG + 0), a
-;src/main.c:129: while(1) {
-00111$:
-;src/main.c:142: if(joypad()&J_LEFT){
+;src/main.c:131: while(1) {
+00115$:
+;src/main.c:144: if(joypad()&J_LEFT){
 	call	_joypad
 	bit	1, e
 	jr	Z, 00103$
-;src/main.c:143: for(int i=0; i<=5; i=i+1) {
+;src/main.c:145: for(int i=0; i<=5; i=i+1) {
 	ld	bc, #0x0000
-00115$:
+00119$:
 	ld	e, b
 	ld	d, #0x00
 	ld	a, #0x05
@@ -4847,41 +4847,41 @@ _main::
 	ld	a, #0x00
 	sbc	a, b
 	bit	7, e
-	jr	Z, 00179$
+	jr	Z, 00189$
 	bit	7, d
-	jr	NZ, 00180$
+	jr	NZ, 00190$
 	cp	a, a
-	jr	00180$
-00179$:
+	jr	00190$
+00189$:
 	bit	7, d
-	jr	Z, 00180$
+	jr	Z, 00190$
 	scf
-00180$:
+00190$:
 	jr	C, 00103$
-;src/main.c:144: alpha.x-=5;
+;src/main.c:146: alpha.x-=5;
 	ld	de, #_alpha+30
 	ld	a, (de)
 	add	a, #0xfb
 	ld	(de), a
-;src/main.c:148: delay(20);
+;src/main.c:150: delay(20);
 	push	bc
 	ld	de, #0x0014
 	push	de
 	call	_delay
 	pop	hl
 	pop	bc
-;src/main.c:143: for(int i=0; i<=5; i=i+1) {
+;src/main.c:145: for(int i=0; i<=5; i=i+1) {
 	inc	bc
-	jr	00115$
+	jr	00119$
 00103$:
-;src/main.c:153: if(joypad()&J_RIGHT){
+;src/main.c:155: if(joypad()&J_RIGHT){
 	call	_joypad
 	ld	a, e
 	rrca
 	jr	NC, 00106$
-;src/main.c:154: for(int i=0; i<=5; i=i+1) {
+;src/main.c:156: for(int i=0; i<=5; i=i+1) {
 	ld	bc, #0x0000
-00118$:
+00122$:
 	ld	e, b
 	ld	d, #0x00
 	ld	a, #0x05
@@ -4889,70 +4889,78 @@ _main::
 	ld	a, #0x00
 	sbc	a, b
 	bit	7, e
-	jr	Z, 00182$
+	jr	Z, 00192$
 	bit	7, d
-	jr	NZ, 00183$
+	jr	NZ, 00193$
 	cp	a, a
-	jr	00183$
-00182$:
+	jr	00193$
+00192$:
 	bit	7, d
-	jr	Z, 00183$
+	jr	Z, 00193$
 	scf
-00183$:
+00193$:
 	jr	C, 00106$
-;src/main.c:155: alpha.x+=5;
+;src/main.c:157: alpha.x+=5;
 	ld	de, #_alpha+30
 	ld	a, (de)
 	add	a, #0x05
 	ld	(de), a
-;src/main.c:158: delay(20);
+;src/main.c:160: delay(20);
 	push	bc
 	ld	de, #0x0014
 	push	de
 	call	_delay
 	pop	hl
 	pop	bc
-;src/main.c:154: for(int i=0; i<=5; i=i+1) {
+;src/main.c:156: for(int i=0; i<=5; i=i+1) {
 	inc	bc
-	jr	00118$
+	jr	00122$
 00106$:
-;src/main.c:161: if(joypad()&J_A){
+;src/main.c:166: if(joypad()&J_A){
 	call	_joypad
 	bit	4, e
-	jr	Z, 00109$
-;src/main.c:162: for(int i=0; i<=5; i=i+1) {
-	ld	bc, #0x0000
-00121$:
-	ld	e, b
-	ld	d, #0x00
-	ld	a, #0x05
-	cp	a, c
-	ld	a, #0x00
-	sbc	a, b
-	bit	7, e
-	jr	Z, 00185$
-	bit	7, d
-	jr	NZ, 00186$
-	cp	a, a
-	jr	00186$
-00185$:
-	bit	7, d
-	jr	Z, 00186$
-	scf
-00186$:
-	jr	C, 00109$
-;src/main.c:163: wait_vbl_done();
-	call	_wait_vbl_done
-;src/main.c:165: alpha.y-=1;
-	ld	de, #_alpha+31
-	ld	a, (de)
-	dec	a
-	ld	(de), a
-;src/main.c:162: for(int i=0; i<=5; i=i+1) {
-	inc	bc
-	jr	00121$
-00109$:
-;src/main.c:180: MoveSprite(&alpha,alpha.x,alpha.y);
+	jr	Z, 00113$
+;src/main.c:168: for (INT8 i = 0; i < 10; i++)
+	ld	c, #0x00
+00125$:
+	ld	a, c
+	xor	a, #0x80
+	sub	a, #0x8a
+	jr	NC, 00113$
+;src/main.c:172: alpha.y-=(1 *i)^2 + (1 * i);
+	ld	hl, #(_alpha + 31)
+	ld	b, (hl)
+	ld	a, c
+	ld	e, a
+	rlca
+	ld	a, c
+	inc	a
+	inc	a
+	ld	l, a
+;	spillPairReg hl
+;	spillPairReg hl
+	rlca
+;	spillPairReg hl
+;	spillPairReg hl
+	ld	a, e
+	xor	a, l
+	ld	e, a
+	ld	a, b
+	sub	a, e
+	ld	(#(_alpha + 31)),a
+;src/main.c:175: delay(20);
+	push	bc
+	ld	de, #0x0014
+	push	de
+	call	_delay
+	pop	hl
+	pop	bc
+;src/main.c:168: for (INT8 i = 0; i < 10; i++)
+	inc	c
+	jr	00125$
+;src/main.c:182: for (INT8 i = 0; i < 10; i++)
+00113$:
+;src/main.c:202: MoveSprite(&alpha,alpha.x,alpha.y);
 	ld	hl, #_alpha + 31
 	ld	b, (hl)
 	ld	a, (#(_alpha + 30) + 0)
@@ -4965,10 +4973,10 @@ _main::
 	call	_MoveSprite
 	add	sp, #4
 ;/Users/florianmac/Documents/sdk/gbdk/include/gb/gb.h:860: SCX_REG+=x, SCY_REG+=y;
-;src/main.c:186: wait_vbl_done();
+;src/main.c:208: wait_vbl_done();
 	call	_wait_vbl_done
-;src/main.c:188: }
-	jp	00111$
+;src/main.c:210: }
+	jp	00115$
 	.area _CODE
 	.area _INITIALIZER
 __xinit__spritesize:

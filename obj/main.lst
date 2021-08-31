@@ -4788,19 +4788,19 @@
                                    4788 ;src/main.c:115: } 
       00130C E8 05                 4789 	add	sp, #5
       00130E C9                    4790 	ret
-                                   4791 ;src/main.c:117: void main(){
+                                   4791 ;src/main.c:119: void main(){
                                    4792 ;	---------------------------------
                                    4793 ; Function main
                                    4794 ; ---------------------------------
       00130F                       4795 _main::
-                                   4796 ;src/main.c:119: set_bkg_data(0, 153, devil_data);
+                                   4796 ;src/main.c:121: set_bkg_data(0, 153, devil_data);
       00130F 11r20r00              4797 	ld	de, #_devil_data
       001312 D5                    4798 	push	de
       001313 21 00 99              4799 	ld	hl, #0x9900
       001316 E5                    4800 	push	hl
       001317 CDr00r00              4801 	call	_set_bkg_data
       00131A E8 04                 4802 	add	sp, #4
-                                   4803 ;src/main.c:120: set_bkg_tiles(0, 0, 20, 18, devil_map);
+                                   4803 ;src/main.c:122: set_bkg_tiles(0, 0, 20, 18, devil_map);
       00131C 11rB0r09              4804 	ld	de, #_devil_map
       00131F D5                    4805 	push	de
       001320 21 14 12              4806 	ld	hl, #0x1214
@@ -4810,36 +4810,36 @@
       001326 F5                    4810 	push	af
       001327 CDr00r00              4811 	call	_set_bkg_tiles
       00132A E8 06                 4812 	add	sp, #6
-                                   4813 ;src/main.c:121: SHOW_BKG;
+                                   4813 ;src/main.c:123: SHOW_BKG;
       00132C F0r00                 4814 	ldh	a, (_LCDC_REG + 0)
       00132E F6 01                 4815 	or	a, #0x01
       001330 E0r00                 4816 	ldh	(_LCDC_REG + 0), a
-                                   4817 ;src/main.c:122: set_sprite_data(0, 30, Chibi_babies2_data);
+                                   4817 ;src/main.c:124: set_sprite_data(0, 30, Chibi_babies2_data);
       001332 11r18r0B              4818 	ld	de, #_Chibi_babies2_data
       001335 D5                    4819 	push	de
       001336 21 00 1E              4820 	ld	hl, #0x1e00
       001339 E5                    4821 	push	hl
       00133A CDr00r00              4822 	call	_set_sprite_data
       00133D E8 04                 4823 	add	sp, #4
-                                   4824 ;src/main.c:124: MakeSprite();
+                                   4824 ;src/main.c:126: MakeSprite();
       00133F CDr94r12              4825 	call	_MakeSprite
-                                   4826 ;src/main.c:126: SHOW_SPRITES;
+                                   4826 ;src/main.c:128: SHOW_SPRITES;
       001342 F0r00                 4827 	ldh	a, (_LCDC_REG + 0)
       001344 F6 02                 4828 	or	a, #0x02
       001346 E0r00                 4829 	ldh	(_LCDC_REG + 0), a
-                                   4830 ;src/main.c:128: DISPLAY_ON;
+                                   4830 ;src/main.c:130: DISPLAY_ON;
       001348 F0r00                 4831 	ldh	a, (_LCDC_REG + 0)
       00134A F6 80                 4832 	or	a, #0x80
       00134C E0r00                 4833 	ldh	(_LCDC_REG + 0), a
-                                   4834 ;src/main.c:129: while(1) {
-      00134E                       4835 00111$:
-                                   4836 ;src/main.c:142: if(joypad()&J_LEFT){
+                                   4834 ;src/main.c:131: while(1) {
+      00134E                       4835 00115$:
+                                   4836 ;src/main.c:144: if(joypad()&J_LEFT){
       00134E CDr00r00              4837 	call	_joypad
       001351 CB 4B                 4838 	bit	1, e
       001353 28 32                 4839 	jr	Z, 00103$
-                                   4840 ;src/main.c:143: for(int i=0; i<=5; i=i+1) {
+                                   4840 ;src/main.c:145: for(int i=0; i<=5; i=i+1) {
       001355 01 00 00              4841 	ld	bc, #0x0000
-      001358                       4842 00115$:
+      001358                       4842 00119$:
       001358 58                    4843 	ld	e, b
       001359 16 00                 4844 	ld	d, #0x00
       00135B 3E 05                 4845 	ld	a, #0x05
@@ -4847,41 +4847,41 @@
       00135E 3E 00                 4847 	ld	a, #0x00
       001360 98                    4848 	sbc	a, b
       001361 CB 7B                 4849 	bit	7, e
-      001363 28 07                 4850 	jr	Z, 00179$
+      001363 28 07                 4850 	jr	Z, 00189$
       001365 CB 7A                 4851 	bit	7, d
-      001367 20 08                 4852 	jr	NZ, 00180$
+      001367 20 08                 4852 	jr	NZ, 00190$
       001369 BF                    4853 	cp	a, a
-      00136A 18 05                 4854 	jr	00180$
-      00136C                       4855 00179$:
+      00136A 18 05                 4854 	jr	00190$
+      00136C                       4855 00189$:
       00136C CB 7A                 4856 	bit	7, d
-      00136E 28 01                 4857 	jr	Z, 00180$
+      00136E 28 01                 4857 	jr	Z, 00190$
       001370 37                    4858 	scf
-      001371                       4859 00180$:
+      001371                       4859 00190$:
       001371 38 14                 4860 	jr	C, 00103$
-                                   4861 ;src/main.c:144: alpha.x-=5;
+                                   4861 ;src/main.c:146: alpha.x-=5;
       001373 11r1Er00              4862 	ld	de, #_alpha+30
       001376 1A                    4863 	ld	a, (de)
       001377 C6 FB                 4864 	add	a, #0xfb
       001379 12                    4865 	ld	(de), a
-                                   4866 ;src/main.c:148: delay(20);
+                                   4866 ;src/main.c:150: delay(20);
       00137A C5                    4867 	push	bc
       00137B 11 14 00              4868 	ld	de, #0x0014
       00137E D5                    4869 	push	de
       00137F CDr00r00              4870 	call	_delay
       001382 E1                    4871 	pop	hl
       001383 C1                    4872 	pop	bc
-                                   4873 ;src/main.c:143: for(int i=0; i<=5; i=i+1) {
+                                   4873 ;src/main.c:145: for(int i=0; i<=5; i=i+1) {
       001384 03                    4874 	inc	bc
-      001385 18 D1                 4875 	jr	00115$
+      001385 18 D1                 4875 	jr	00119$
       001387                       4876 00103$:
-                                   4877 ;src/main.c:153: if(joypad()&J_RIGHT){
+                                   4877 ;src/main.c:155: if(joypad()&J_RIGHT){
       001387 CDr00r00              4878 	call	_joypad
       00138A 7B                    4879 	ld	a, e
       00138B 0F                    4880 	rrca
       00138C 30 32                 4881 	jr	NC, 00106$
-                                   4882 ;src/main.c:154: for(int i=0; i<=5; i=i+1) {
+                                   4882 ;src/main.c:156: for(int i=0; i<=5; i=i+1) {
       00138E 01 00 00              4883 	ld	bc, #0x0000
-      001391                       4884 00118$:
+      001391                       4884 00122$:
       001391 58                    4885 	ld	e, b
       001392 16 00                 4886 	ld	d, #0x00
       001394 3E 05                 4887 	ld	a, #0x05
@@ -4889,88 +4889,96 @@
       001397 3E 00                 4889 	ld	a, #0x00
       001399 98                    4890 	sbc	a, b
       00139A CB 7B                 4891 	bit	7, e
-      00139C 28 07                 4892 	jr	Z, 00182$
+      00139C 28 07                 4892 	jr	Z, 00192$
       00139E CB 7A                 4893 	bit	7, d
-      0013A0 20 08                 4894 	jr	NZ, 00183$
+      0013A0 20 08                 4894 	jr	NZ, 00193$
       0013A2 BF                    4895 	cp	a, a
-      0013A3 18 05                 4896 	jr	00183$
-      0013A5                       4897 00182$:
+      0013A3 18 05                 4896 	jr	00193$
+      0013A5                       4897 00192$:
       0013A5 CB 7A                 4898 	bit	7, d
-      0013A7 28 01                 4899 	jr	Z, 00183$
+      0013A7 28 01                 4899 	jr	Z, 00193$
       0013A9 37                    4900 	scf
-      0013AA                       4901 00183$:
+      0013AA                       4901 00193$:
       0013AA 38 14                 4902 	jr	C, 00106$
-                                   4903 ;src/main.c:155: alpha.x+=5;
+                                   4903 ;src/main.c:157: alpha.x+=5;
       0013AC 11r1Er00              4904 	ld	de, #_alpha+30
       0013AF 1A                    4905 	ld	a, (de)
       0013B0 C6 05                 4906 	add	a, #0x05
       0013B2 12                    4907 	ld	(de), a
-                                   4908 ;src/main.c:158: delay(20);
+                                   4908 ;src/main.c:160: delay(20);
       0013B3 C5                    4909 	push	bc
       0013B4 11 14 00              4910 	ld	de, #0x0014
       0013B7 D5                    4911 	push	de
       0013B8 CDr00r00              4912 	call	_delay
       0013BB E1                    4913 	pop	hl
       0013BC C1                    4914 	pop	bc
-                                   4915 ;src/main.c:154: for(int i=0; i<=5; i=i+1) {
+                                   4915 ;src/main.c:156: for(int i=0; i<=5; i=i+1) {
       0013BD 03                    4916 	inc	bc
-      0013BE 18 D1                 4917 	jr	00118$
+      0013BE 18 D1                 4917 	jr	00122$
       0013C0                       4918 00106$:
-                                   4919 ;src/main.c:161: if(joypad()&J_A){
+                                   4919 ;src/main.c:166: if(joypad()&J_A){
       0013C0 CDr00r00              4920 	call	_joypad
       0013C3 CB 63                 4921 	bit	4, e
-      0013C5 28 2A                 4922 	jr	Z, 00109$
-                                   4923 ;src/main.c:162: for(int i=0; i<=5; i=i+1) {
-      0013C7 01 00 00              4924 	ld	bc, #0x0000
-      0013CA                       4925 00121$:
-      0013CA 58                    4926 	ld	e, b
-      0013CB 16 00                 4927 	ld	d, #0x00
-      0013CD 3E 05                 4928 	ld	a, #0x05
-      0013CF B9                    4929 	cp	a, c
-      0013D0 3E 00                 4930 	ld	a, #0x00
-      0013D2 98                    4931 	sbc	a, b
-      0013D3 CB 7B                 4932 	bit	7, e
-      0013D5 28 07                 4933 	jr	Z, 00185$
-      0013D7 CB 7A                 4934 	bit	7, d
-      0013D9 20 08                 4935 	jr	NZ, 00186$
-      0013DB BF                    4936 	cp	a, a
-      0013DC 18 05                 4937 	jr	00186$
-      0013DE                       4938 00185$:
-      0013DE CB 7A                 4939 	bit	7, d
-      0013E0 28 01                 4940 	jr	Z, 00186$
-      0013E2 37                    4941 	scf
-      0013E3                       4942 00186$:
-      0013E3 38 0C                 4943 	jr	C, 00109$
-                                   4944 ;src/main.c:163: wait_vbl_done();
-      0013E5 CDr00r00              4945 	call	_wait_vbl_done
-                                   4946 ;src/main.c:165: alpha.y-=1;
-      0013E8 11r1Fr00              4947 	ld	de, #_alpha+31
-      0013EB 1A                    4948 	ld	a, (de)
-      0013EC 3D                    4949 	dec	a
-      0013ED 12                    4950 	ld	(de), a
-                                   4951 ;src/main.c:162: for(int i=0; i<=5; i=i+1) {
-      0013EE 03                    4952 	inc	bc
-      0013EF 18 D9                 4953 	jr	00121$
-      0013F1                       4954 00109$:
-                                   4955 ;src/main.c:180: MoveSprite(&alpha,alpha.x,alpha.y);
-      0013F1 21r1Fr00              4956 	ld	hl, #_alpha + 31
-      0013F4 46                    4957 	ld	b, (hl)
-      0013F5 FAr1Er00              4958 	ld	a, (#(_alpha + 30) + 0)
-      0013F8 C5                    4959 	push	bc
-      0013F9 33                    4960 	inc	sp
-      0013FA F5                    4961 	push	af
-      0013FB 33                    4962 	inc	sp
-      0013FC 11r00r00              4963 	ld	de, #_alpha
-      0013FF D5                    4964 	push	de
-      001400 CDrF8r0C              4965 	call	_MoveSprite
-      001403 E8 04                 4966 	add	sp, #4
-                                   4967 ;/Users/florianmac/Documents/sdk/gbdk/include/gb/gb.h:860: SCX_REG+=x, SCY_REG+=y;
-                                   4968 ;src/main.c:186: wait_vbl_done();
-      001405 CDr00r00              4969 	call	_wait_vbl_done
-                                   4970 ;src/main.c:188: }
-      001408 C3r4Er13              4971 	jp	00111$
-                                   4972 	.area _CODE
-                                   4973 	.area _INITIALIZER
-      000000                       4974 __xinit__spritesize:
-      000000 08                    4975 	.db #0x08	; 8
-                                   4976 	.area _CABS (ABS)
+      0013C5 28 2A                 4922 	jr	Z, 00113$
+                                   4923 ;src/main.c:168: for (INT8 i = 0; i < 10; i++)
+      0013C7 0E 00                 4924 	ld	c, #0x00
+      0013C9                       4925 00125$:
+      0013C9 79                    4926 	ld	a, c
+      0013CA EE 80                 4927 	xor	a, #0x80
+      0013CC D6 8A                 4928 	sub	a, #0x8a
+      0013CE 30 21                 4929 	jr	NC, 00113$
+                                   4930 ;src/main.c:172: alpha.y-=(1 *i)^2 + (1 * i);
+      0013D0 21r1Fr00              4931 	ld	hl, #(_alpha + 31)
+      0013D3 46                    4932 	ld	b, (hl)
+      0013D4 79                    4933 	ld	a, c
+      0013D5 5F                    4934 	ld	e, a
+      0013D6 07                    4935 	rlca
+      0013D7 79                    4936 	ld	a, c
+      0013D8 3C                    4937 	inc	a
+      0013D9 3C                    4938 	inc	a
+      0013DA 6F                    4939 	ld	l, a
+                                   4940 ;	spillPairReg hl
+                                   4941 ;	spillPairReg hl
+      0013DB 07                    4942 	rlca
+                                   4943 ;	spillPairReg hl
+                                   4944 ;	spillPairReg hl
+      0013DC 7B                    4945 	ld	a, e
+      0013DD AD                    4946 	xor	a, l
+      0013DE 5F                    4947 	ld	e, a
+      0013DF 78                    4948 	ld	a, b
+      0013E0 93                    4949 	sub	a, e
+      0013E1 EAr1Fr00              4950 	ld	(#(_alpha + 31)),a
+                                   4951 ;src/main.c:175: delay(20);
+      0013E4 C5                    4952 	push	bc
+      0013E5 11 14 00              4953 	ld	de, #0x0014
+      0013E8 D5                    4954 	push	de
+      0013E9 CDr00r00              4955 	call	_delay
+      0013EC E1                    4956 	pop	hl
+      0013ED C1                    4957 	pop	bc
+                                   4958 ;src/main.c:168: for (INT8 i = 0; i < 10; i++)
+      0013EE 0C                    4959 	inc	c
+      0013EF 18 D8                 4960 	jr	00125$
+                                   4961 ;src/main.c:182: for (INT8 i = 0; i < 10; i++)
+      0013F1                       4962 00113$:
+                                   4963 ;src/main.c:202: MoveSprite(&alpha,alpha.x,alpha.y);
+      0013F1 21r1Fr00              4964 	ld	hl, #_alpha + 31
+      0013F4 46                    4965 	ld	b, (hl)
+      0013F5 FAr1Er00              4966 	ld	a, (#(_alpha + 30) + 0)
+      0013F8 C5                    4967 	push	bc
+      0013F9 33                    4968 	inc	sp
+      0013FA F5                    4969 	push	af
+      0013FB 33                    4970 	inc	sp
+      0013FC 11r00r00              4971 	ld	de, #_alpha
+      0013FF D5                    4972 	push	de
+      001400 CDrF8r0C              4973 	call	_MoveSprite
+      001403 E8 04                 4974 	add	sp, #4
+                                   4975 ;/Users/florianmac/Documents/sdk/gbdk/include/gb/gb.h:860: SCX_REG+=x, SCY_REG+=y;
+                                   4976 ;src/main.c:208: wait_vbl_done();
+      001405 CDr00r00              4977 	call	_wait_vbl_done
+                                   4978 ;src/main.c:210: }
+      001408 C3r4Er13              4979 	jp	00115$
+                                   4980 	.area _CODE
+                                   4981 	.area _INITIALIZER
+      000000                       4982 __xinit__spritesize:
+      000000 08                    4983 	.db #0x08	; 8
+                                   4984 	.area _CABS (ABS)
